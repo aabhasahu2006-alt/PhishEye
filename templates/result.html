@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔍 PhishEye — Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .box {
+            max-width: 880px;
+            margin: 24px auto;
+            background: #111827;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+        }
+        table { width:100%; border-collapse:collapse; color:#e6eef8; }
+        th, td { padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.03); text-align:left; }
+        th { background:#0b1220; font-size:16px; }
+        .safe { color:#22c55e; font-weight:700; }
+        .phish { color:#ef4444; font-weight:700; }
+        .small { color:#9aa7bf; font-size:14px; margin-top:8px; display:block; }
+        a.back { color:#60a5fa; text-decoration:none; display:inline-block; margin-top:14px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 <span style="color:#60a5fa; font-weight:800">PhishEye</span> — Result</h1>
+
+    <div class="box">
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>URL / Email Input</td>
+                <td>{{ url if url else (email_text if email_text else 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td>Verdict</td>
+                <td class="{{ 'safe' if prediction == 'Legitimate' else 'phish' }}">{{ prediction }}</td>
+            </tr>
+            <tr>
+                <td>Confidence</td>
+                <td>{{ confidence if confidence is not none else 'N/A' }}{% if confidence is not none %}%{% endif %}</td>
+            </tr>
+            <tr>
+                <td>Details / Features</td>
+                <td style="white-space:pre-wrap; font-size:14px">{{ features if features else reasons if reasons else 'No details' }}</td>
+            </tr>
+        </table>
+
+        <a class="back" href="/">🔙 Back to PhishEye</a>
+        <span class="small">Tip: For better results train the model on a larger dataset and include more URL/email features.</span>
+    </div>
+</body>
+</html>

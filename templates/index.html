@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🔍 PhishEye — Phishing Detection Tool</title>
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1724; --muted:#9aa7bf; --accent:#4caf50;
+    }
+    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#fff}
+    .wrap{max-width:1000px;margin:36px auto;padding:18px}
+    h1{margin:0 0 12px;font-size:28px}
+    .brand {font-weight:800; color:#60a5fa;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,0.6)}
+    label{display:block;margin-bottom:6px;color:var(--muted);font-size:13px}
+    input[type="text"], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;box-sizing:border-box}
+    textarea{min-height:140px;resize:vertical}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-weight:600;margin-top:10px}
+    .hint{font-size:13px;color:var(--muted);margin-top:8px}
+    .full {grid-column:1 / -1}
+    .small {font-size:13px;color:var(--muted)}
+    .footer {text-align:center;margin-top:18px;color:var(--muted);font-size:13px}
+    @media (max-width:820px){ .grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🔍 <span class="brand">PhishEye</span> — Phishing Detection Tool</h1>
+    <p class="small">Check a URL or paste an email to detect possible phishing. Results page will show verdict, confidence and details.</p>
+
+    <div class="grid">
+      <!-- URL Checker -->
+      <div class="card">
+        <h3 style="margin-top:0">🔗 URL Checker</h3>
+        <form action="/predict" method="post">
+          <label for="url">Enter URL</label>
+          <input type="text" id="url" name="url" placeholder="https://example.com/suspicious" required>
+          <button class="btn" type="submit">Check URL</button>
+        </form>
+        <div class="hint">Tip: Use full URL (including http/https) for best results.</div>
+      </div>
+
+      <!-- Email Checker -->
+      <div class="card">
+        <h3 style="margin-top:0">📧 Email Checker</h3>
+        <form action="/check_email" method="post">
+          <label for="email_text">Paste email content (subject + body)</label>
+          <textarea id="email_text" name="email_text" placeholder="Paste the full email text here..." required></textarea>
+          <button class="btn" type="submit">Check Email</button>
+        </form>
+        <div class="hint">Tip: Include any links or sender details in the pasted text.</div>
+      </div>
+
+      <!-- Optional: quick examples (full width) -->
+      <div class="card full">
+        <h3 style="margin-top:0">Examples you can try</h3>
+        <ul style="color:var(--muted);margin:8px 0 0 18px">
+          <li><code>https://www.google.com</code> — expected: Legitimate</li>
+          <li><code>http://phishing-site.ru/login</code> — expected: Phishing</li>
+          <li>Email example: <em>"Immediate action required. Click http://fake-bank-login.com to verify your account."</em> — expected: Phishing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Running locally — open <strong>http://127.0.0.1:5000/</strong> in your browser. Use the forms above to submit and view results.
+    </div>
+  </div>
+</body>
+</html>
