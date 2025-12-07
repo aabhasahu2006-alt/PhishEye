@@ -3,5 +3,5 @@ scikit-learn
 numpy
 pandas
 joblib
-Regex(re)
 gunicorn
+
